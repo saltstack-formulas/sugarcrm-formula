@@ -26,11 +26,10 @@ Pillar customizations:
 .. code-block:: yaml
 
     wordpress:
-      wp-username: wordpressUserName
-      wp-database: wordpressDatabaseName
+      wp-username: <your-wordpress-mysql-username>
+      wp-database: <your-wordpress-database-name>
       wp-passwords:
-        wordpress: wordpressPassword
-        root: wordpressDatabasePassword
+        wordpress: <your-wordpress-mysql-user-password>
 
 Formula Dependencies
 ====================
