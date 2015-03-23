@@ -1,0 +1,11 @@
+{% set map = salt['grains.filter_by']({
+    'default': {
+        'pkgs': ['php5-mysql', 'python-mysqldb', ]
+    },
+    'Debian': {
+        'pkgs': ['php5-mysql', 'python-mysqldb', ]
+    },
+    'Redhat': {
+      'pkgs': ['php-mysql', 'MySQL-python', ]
+    },
+}, merge=salt['pillar.get']('wordpress:lookup')) %}

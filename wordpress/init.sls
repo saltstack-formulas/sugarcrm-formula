@@ -1,10 +1,8 @@
-{% if grains['os_family'] == 'RedHat' %}
+{% from "wordpress/map.jinja" import map with context %}
 
 wordpress-packages:
   pkg.latest:
-    - pkgs:
-      - php-mysql
-      - MySQL-python
+    - pkgs: {{ map.pkgs|json }}
     - require:
       - pkg: mysql-packages
 
@@ -61,5 +59,3 @@ wordpress-config:
       password: {{ pillar['wordpress']['wp-passwords']['wordpress'] }}
     - require:
       - cmd: get-wordpress
-
-{% endif %}
