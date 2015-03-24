@@ -35,7 +35,7 @@ Formula Dependencies
 ====================
 
 * `apache-formula <https://github.com/saltstack-formulas/apache-formula>`_
-* `mysql-formula <https://github.com/saltstack-formulas/mysql-formula>`_
+* `saltstack-mysql-formula <https://github.com/bechtoldt/saltstack-mysql-formula>`_
 * `php-formula <https://github.com/saltstack-formulas/php-formula>`_
 
 Author
