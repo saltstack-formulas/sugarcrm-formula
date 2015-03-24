@@ -3,3 +3,7 @@ wordpress:
   wp-database: wordpressDatabase
   wp-passwords:
     wordpress: wordpressPassword
+
+# Override any values defined in map.jinja
+  lookup:
+    wordpress_config_name: /www/wordpress/docs/wp-config.php
