@@ -7,28 +7,6 @@ wordpress-packages:
   pkg.latest:
     - pkgs: {{ map.pkgs|json }}
 
-wordpress-database:
-  mysql_database.present:
-    - name: {{ pillar['wordpress']['wp-database'] }}
-    - require:
-      - service: mysqld
-      - pkg: wordpress-packages
-  mysql_user.present:
-    - name: {{ pillar['wordpress']['wp-username'] }}
-    - host: localhost
-    - password: {{ pillar['wordpress']['wp-passwords']['wordpress'] }}
-    - require:
-      - service: mysqld
-      - pkg: wordpress-packages
-  mysql_grants.present:
-    - database: {{ pillar['wordpress']['wp-database'] }}.*
-    - grant: all privileges
-    - user: {{ pillar['wordpress']['wp-username'] }}
-    - host: localhost
-    - require:
-      - mysql_database: {{ pillar['wordpress']['wp-database'] }}
-      - mysql_user: {{ pillar['wordpress']['wp-username'] }}
-
 get-wordpress:
   cmd.run:
     - name: 'curl -O http://wordpress.org/latest.tar.gz && tar xvzf latest.tar.gz && /bin/rm latest.tar.gz'
