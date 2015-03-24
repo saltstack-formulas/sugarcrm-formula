@@ -1,10 +1,11 @@
 {% from "wordpress/map.jinja" import map with context %}
 
+include:
+  - mysql.server
+ 
 wordpress-packages:
   pkg.latest:
     - pkgs: {{ map.pkgs|json }}
-    - require:
-      - pkg: mysql-packages
 
 wordpress-database:
   mysql_database.present:
