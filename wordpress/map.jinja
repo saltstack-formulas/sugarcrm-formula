@@ -1,11 +1,20 @@
 {% set map = salt['grains.filter_by']({
     'default': {
-        'pkgs': ['php5-mysql', 'python-mysqldb', ]
+        'pkgs': ['php5_mysql', 'python-mysqldb', ],
+        'wordpress_config_name': '/var/www/html/wp-config.php',
+        'www_group': 'www-data',
+        'www_user': 'www-data',
     },
     'Debian': {
-        'pkgs': ['php5-mysql', 'python-mysqldb', ]
+        'pkgs': ['php5_mysql', 'python-mysqldb', ],
+        'wordpress_config_name': '/var/www/html/wp-config.php',
+        'www_group': 'www-data',
+        'www_user': 'www-data',
     },
     'Redhat': {
-      'pkgs': ['php-mysql', 'MySQL-python', ]
+        'pkgs': ['php_mysql', 'MySQL-python', ],
+        'wordpress_config_name': '/var/www/html/wp-config.php',
+        'www_group': 'apache',
+        'www_user': 'apache',
     },
 }, merge=salt['pillar.get']('wordpress:lookup')) %}
