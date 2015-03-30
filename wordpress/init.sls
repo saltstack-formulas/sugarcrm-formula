@@ -9,6 +9,14 @@ wordpress-packages:
     - installed
     - pkgs: {{ map.pkgs|json }}
 
+docroot-dir:
+  file.directory:
+    - name: {{ map.docroot }}
+    - user: {{ map.www_user }}
+    - group: {{ map.www_group }}
+    - mode: 755
+    - makedirs: True
+
 get-wordpress:
   cmd.run:
     - name: 'curl -O https://wordpress.org/latest.tar.gz && tar xvzf latest.tar.gz && /bin/rm latest.tar.gz && mv wordpress {{ map.wordpress_dir }}'
