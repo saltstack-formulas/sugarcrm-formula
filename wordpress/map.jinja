@@ -1,19 +1,22 @@
 {% set map = salt['grains.filter_by']({
     'default': {
-        'pkgs': ['php5_mysql', 'python-mysqldb', ],
-        'wordpress_config_name': '/var/www/html/wp-config.php',
+        'docroot': '/www/html',
+        'pkgs': ['php5-mysql', 'python-mysqldb', ],
+        'wordpress_dir': 'wordpress',
         'www_group': 'www-data',
         'www_user': 'www-data',
     },
     'Debian': {
-        'pkgs': ['php5_mysql', 'python-mysqldb', ],
-        'wordpress_config_name': '/var/www/html/wp-config.php',
+        'docroot': '/www/html',
+        'pkgs': ['php5-mysql', 'python-mysqldb', ],
+        'wordpress_dir': 'wordpress',
         'www_group': 'www-data',
         'www_user': 'www-data',
     },
     'Redhat': {
+        'docroot': '/var/www/html',
         'pkgs': ['php_mysql', 'MySQL-python', ],
-        'wordpress_config_name': '/var/www/html/wp-config.php',
+        'wordpress_dir': 'wordpress',
         'www_group': 'apache',
         'www_user': 'apache',
     },
