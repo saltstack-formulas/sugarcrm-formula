@@ -14,5 +14,3 @@ get-wordpress:
     - name: 'curl -O http://wordpress.org/latest.tar.gz && tar xvzf latest.tar.gz && /bin/rm latest.tar.gz'
     - cwd: /var/www/html/
     - unless: test -d /var/www/html/wordpress
-    - require_in:
-      - file: /var/www/html/wordpress/wp-config.php
