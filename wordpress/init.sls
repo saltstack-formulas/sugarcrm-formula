@@ -5,7 +5,8 @@ include:
   - mysql.server
  
 wordpress-packages:
-  pkg.latest:
+  pkg:
+    - installed
     - pkgs: {{ map.pkgs|json }}
 
 get-wordpress:
