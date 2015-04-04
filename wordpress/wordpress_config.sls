@@ -10,7 +10,9 @@ include:
 wordpress-config:
   file.managed:
     - name: {{ map.docroot }}/wp-config.php
-    - source: salt://mysql/files/wp-config.php
+    - source: 
+      - salt://mysql/files/wp-config.php.{{ grains['fqdn'] }}
+      - salt://mysql/files/wp-config.php
     - mode: 0644
     - user: {{ map.www_user }}
     - group: {{ map.www_group }}
@@ -22,3 +24,10 @@ wordpress-config:
       username: {{ username }}
       database: {{ database }}
       password: {{ password }}
+
+wordpress-keys-file:
+  cmd.run:
+    - name: /usr/bin/curl -s -o {{ map.docroot }}/wp-keys.php https://api.wordpress.org/secret-key/1.1/salt/ && /bin/sed -i "1i\\<?php" {{ map.docroot }}/wp-keys.php && chown -R {{ map.www_user }}:{{ map.www_group }} {{ map.docroot }}
+    - unless: test -e {{ map.docroot }}/wp-keys.php
+    - require_in:
+      - file: wordpress-config
