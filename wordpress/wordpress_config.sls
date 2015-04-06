@@ -11,8 +11,8 @@ wordpress-config:
   file.managed:
     - name: {{ map.docroot }}/wp-config.php
     - source: 
-      - salt://mysql/files/wp-config.php.{{ grains['fqdn'] }}
-      - salt://mysql/files/wp-config.php
+      - salt://wordpress/files/wp-config.php.{{ grains['fqdn'] }}
+      - salt://wordpress/files/wp-config.php
     - mode: 0644
     - user: {{ map.www_user }}
     - group: {{ map.www_group }}
