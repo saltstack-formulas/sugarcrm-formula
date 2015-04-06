@@ -25,6 +25,16 @@ wordpress-config:
       database: {{ database }}
       password: {{ password }}
 
+wordpress-htaccess:
+  file.managed:
+    - name: {{ map.docroot }}/.htaccess
+    - source: 
+      - salt://wordpress/files/htaccess.{{ grains['fqdn'] }}
+      - salt://wordpress/files/htaccess
+    - mode: 0644
+    - user: {{ map.www_user }}
+    - group: {{ map.www_group }}
+
 wordpress-keys-file:
   cmd.run:
     - name: /usr/bin/curl -s -o {{ map.docroot }}/wp-keys.php https://api.wordpress.org/secret-key/1.1/salt/ && /bin/sed -i "1i\\<?php" {{ map.docroot }}/wp-keys.php && chown -R {{ map.www_user }}:{{ map.www_group }} {{ map.docroot }}
