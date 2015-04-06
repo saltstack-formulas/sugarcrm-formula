@@ -2,7 +2,7 @@
 wordpress-formula
 =================
 
-A saltstack formula to install and configure wordpress on RHEL.
+A saltstack formula to install and configure WordPress on Debian, Ubuntu, and RHEL.
 
 .. note::
 
@@ -18,7 +18,7 @@ Available states
 ``wordpress``
 -------------
 
-Install and configure wordpress
+Install and configure WordPress
 
 Pillar customizations:
 ======================
@@ -42,3 +42,4 @@ Author
 ======
 
 Nitin Madhok nmadhok@g.clemson.edu
+Debian Fork by Starchy Grant starchy@gmail.com
