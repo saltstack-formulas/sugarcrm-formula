@@ -1,4 +1,10 @@
 <?php
+/** 
+ * This file is managed by Salt.
+ *
+ * Local changes will be overwritten!
+ */
+
 /**
  * The base configurations of the WordPress.
  *
@@ -43,7 +49,7 @@ define('DB_COLLATE', '');
  * @since 2.6.0
  */
 
-require_once(ABSPATH . 'wp-keys.php');
+require_once(dirname( __FILE__ ) . '/wp-keys.php');
 
 /**#@-*/
 
