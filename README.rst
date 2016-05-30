@@ -37,6 +37,11 @@ Formula Dependencies
 * `apache-formula <https://github.com/saltstack-formulas/apache-formula>`_
 * `php-formula <https://github.com/saltstack-formulas/php-formula>`_
 
+or
+
+* `nginx-formula <https://github.com/saltstack-formulas/nginx-formula>`_
+* `php-formula <https://github.com/saltstack-formulas/php-formula>`_
+
 Author
 ======
 
