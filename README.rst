@@ -18,7 +18,18 @@ Available states
 ``wordpress``
 -------------
 
-Install and configure WordPress
+Install and configure WordPress sites
+
+``wordpress.cli``
+-------------
+
+Installs wp-cli
+
+
+``wordpress.config``
+-------------
+
+Configure WordPress sites
 
 Pillar customizations:
 ======================
@@ -26,10 +37,16 @@ Pillar customizations:
 .. code-block:: yaml
 
     wordpress:
-      wp-username: <your-wordpress-mysql-username>
-      wp-database: <your-wordpress-database-name>
-      wp-passwords:
-        wordpress: <your-wordpress-mysql-user-password>
+        sites:
+            sitename:
+              username: <your-wordpress-username>
+              password: <your-wordpress-user-password>
+              database: <your-wordpress-database-name>
+              dbuser: <your-wordpress-db-username>
+              dbpass: <your-wordpress-db-password>       
+              url: http://example.ie
+              title: 'My Blog'
+              email: 'john.doe@acme.com'       
 
 Formula Dependencies
 ====================
