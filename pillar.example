@@ -1,9 +1,20 @@
 wordpress:
-  wp-username: wordpressUser
-  wp-database: wordpressDatabase
-  wp-passwords:
-    wordpress: wordpressPassword
-
-# Override any values defined in map.jinja
-  lookup:
-    wordpress_config_name: /www/wordpress/docs/wp-config.php
+    sites:
+        sitenameA:
+            username: siteAuser
+            password: siteApass
+            database: siteAdb
+            dbuser: siteAdbuser
+            dbpass: siteAdbpass
+            url: siteAUrl
+            title: siteAtitle
+            email: siteAemail
+        sitenameB:
+            username: siteBuser
+            password: siteBpass
+            database: siteBdb
+            dbuser: siteBdbuser
+            dbpass: siteBdbpass
+            url: siteBUrl
+            title: siteBtitle
+            email: siteBemail
