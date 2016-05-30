@@ -1,14 +1,6 @@
 {% from "wordpress/map.jinja" import map with context %}
 
-include:
-  - apache
-  - mysql.server
  
-wordpress-packages:
-  pkg:
-    - installed
-    - pkgs: {{ map.pkgs|json }}
-
 docroot-dir:
   file.directory:
     - name: {{ map.docroot }}
