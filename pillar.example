@@ -1,4 +1,7 @@
 wordpress:
+    cli:
+        source: https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+        hash:  https://github.com/wp-cli/builds/blob/gh-pages/phar/wp-cli-nightly.phar.md5
     sites:
         sitenameA.com:
             username: siteAuser
