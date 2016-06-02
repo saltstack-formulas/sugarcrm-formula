@@ -15,7 +15,7 @@ include:
 install_{{ id }}:
  cmd.run:
   - cwd: {{ map.docroot }}/{{ id }}
-  - name: '/usr/local/bin/wp core install --url={{ site.get('url') }} --title={{ site.get('title') }} --admin_user={{ site.get('user') }} --admin_password={{ site.get('password') }} --admin_email={{ site.get('email') }} --path={{ map.docroot }}/{{ id }}'
+  - name: '/usr/local/bin/wp core install --url={{ site.get('url') }} --title='{{ site.get('title') }}' --admin_user={{ site.get('user') }} --admin_password={{ site.get('password') }} --admin_email={{ site.get('email') }} --path={{ map.docroot }}/{{ id }}'
   - user: root
   - unless: test -d {{ map.docroot }}/{{ id }}/wp-config.php
 
