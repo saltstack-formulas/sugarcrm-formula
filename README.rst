@@ -23,7 +23,7 @@ Install and configure sugarcrm sites
 ``sugarcrm.cli``
 -------------
 
-Installs wp-cli
+Installs sugarcli
 
 
 ``sugarcrm.config``
