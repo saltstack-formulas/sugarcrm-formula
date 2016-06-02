@@ -1,8 +1,8 @@
 =================
-wordpress-formula
+sugarcrm-formula
 =================
 
-A saltstack formula to install and configure WordPress on Debian, Ubuntu, and RHEL.
+A saltstack formula to install and configure sugarcrm on Debian, Ubuntu, and RHEL.
 
 .. note::
 
@@ -15,35 +15,35 @@ Available states
 .. contents::
     :local:
 
-``wordpress``
+``sugarcrm``
 -------------
 
-Install and configure WordPress sites
+Install and configure sugarcrm sites
 
-``wordpress.cli``
+``sugarcrm.cli``
 -------------
 
 Installs wp-cli
 
 
-``wordpress.config``
+``sugarcrm.config``
 -------------
 
-Configure WordPress sites
+Configure sugarcrm sites
 
 Pillar customizations:
 ======================
 
 .. code-block:: yaml
 
-    wordpress:
+    sugarcrm:
         sites:
             sitename:
-              username: <your-wordpress-username>
-              password: <your-wordpress-user-password>
-              database: <your-wordpress-database-name>
-              dbuser: <your-wordpress-db-username>
-              dbpass: <your-wordpress-db-password>       
+              username: <your-sugarcrm-username>
+              password: <your-sugarcrm-user-password>
+              database: <your-sugarcrm-database-name>
+              dbuser: <your-sugarcrm-db-username>
+              dbpass: <your-sugarcrm-db-password>       
               url: http://example.ie
               title: 'My Blog'
               email: 'john.doe@acme.com'       
