@@ -1,9 +1,9 @@
-{% from "wordpress/map.jinja" import map with context %}
+{% from "sugarcrm/map.jinja" import map with context %}
 
 include:
-  - wordpress.cli
+  - sugarcrm.cli
 
-{% for id, site in salt['pillar.get']('wordpress:sites', {}).items() %}
+{% for id, site in salt['pillar.get']('sugarcrm:sites', {}).items() %}
 {{ map.docroot }}/{{ id }}:
   file.directory:
     - user: {{ map.www_user }}
@@ -11,7 +11,7 @@ include:
     - mode: 755
     - makedirs: True
 
-# This command tells wp-cli to download wordpress
+# This command tells wp-cli to download sugarcrm
 download_wordpress_{{ id }}:
  cmd.run:
   - cwd: {{ map.docroot }}/{{ id }}
@@ -19,7 +19,7 @@ download_wordpress_{{ id }}:
   - user: {{ map.www_user }}
   - unless: test -d {{ map.docroot }}/{{ id }}/wp-config.php
 
-# This command tells wp-cli to install wordpress
+# This command tells wp-cli to install sugarcrm
 install_{{ id }}:
  cmd.run:
   - cwd: {{ map.docroot }}/{{ id }}
