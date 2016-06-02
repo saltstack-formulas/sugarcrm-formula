@@ -2,10 +2,9 @@
 
 include:
   - wordpress.cli
- 
 
-{% for site in pillar['wordpress']['sites'] %}
-{{ map.docroot }}/{{ site }}:
+{% for id, site in salt['pillar.get']('wordpress:sites', {}).items() %}
+{{ map.docroot }}/{{ id }}:
   file.directory:
     - user: {{ map.www_user }}
     - group: {{ map.www_group }}
@@ -13,18 +12,18 @@ include:
     - makedirs: True
 
 # This command tells wp-cli to install wordpress
-install_wordpress:
+install_{{ id }}:
  cmd.run:
-  - cwd: {{ map.docroot }}/{{ site }}
-  - name: '/usr/local/bin/wp core install --url={{ site.url }} --title={{ site.url }} --admin_user={{ site.user }} --admin_password={{ site.password }} --admin_email={{ site.email }} --path={{ map.docroot }}/{{ site }}'
-  - user: {{ map.www_user }}
-  - unless: test -d {{ map.docroot }}/{{ site }}/wp-config.php
+  - cwd: {{ map.docroot }}/{{ id }}
+  - name: '/usr/local/bin/wp core install --url={{ site.get('url') }} --title={{ site.get('title') }} --admin_user={{ site.get('user') }} --admin_password={{ site.get('password') }} --admin_email={{ site.get('email') }} --path={{ map.docroot }}/{{ id }}'
+  - user: root
+  - unless: test -d {{ map.docroot }}/{{ id }}/wp-config.php
 
 # This command tells wp-cli to create our wp-config.php, DB info needs to be the same as above
-config_wordpress:
+configure_{{ id }}:
  cmd.run:
-  - name: '/usr/local/bin/wp core config --dbname={{ site.database }} --dbuser={{ site.dbuser }} --dbpass={{ site.dbpass }} --path={{ map.docroot }}/{{ site }}'
-  - cwd: {{ map.docroot }}/{{ site }}
-  - user: www-data
+  - name: '/usr/local/bin/wp core config --dbname={{ site.get('database') }} --dbuser={{ site.get('dbuser') }} --dbpass={{ site.get('dbpass') }} --path={{ map.docroot }}/{{ id }}'
+  - cwd: {{ map.docroot }}/{{ id }}
+  - user: root
 
 {% endfor %}
