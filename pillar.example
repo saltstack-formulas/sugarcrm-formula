@@ -1,20 +1,20 @@
 wordpress:
     sites:
-        sitenameA:
+        sitenameA.com:
             username: siteAuser
             password: siteApass
             database: siteAdb
             dbuser: siteAdbuser
             dbpass: siteAdbpass
-            url: siteAUrl
-            title: siteAtitle
-            email: siteAemail
-        sitenameB:
+            url: http://siteA.com
+            title: 'siteA title'
+            email: siteA@email.com
+        sitenameB.com:
             username: siteBuser
             password: siteBpass
             database: siteBdb
             dbuser: siteBdbuser
             dbpass: siteBdbpass
-            url: siteBUrl
-            title: siteBtitle
-            email: siteBemail
+            url: http://siteB.com
+            title: 'siteB title'
+            email: siteB@email.com
