@@ -3,6 +3,11 @@
 include:
   - sugarcrm.cli
 
+download_sugarcrm:
+ cmd.run:
+  - name: 'wget -O  {{ map.tmp_dir }}/sugarcrm.zip {{ salt['pillar.get']('sugarcrm:source') }}'
+  - user: {{ map.www_user }}
+
 {% for id, site in salt['pillar.get']('sugarcrm:sites', {}).items() %}
 {{ map.docroot }}/{{ id }}:
   file.directory:
@@ -11,26 +16,36 @@ include:
     - mode: 755
     - makedirs: True
 
-# This command tells sugarcli to download sugarcrm
-download_wordpress_{{ id }}:
- cmd.run:
-  - cwd: {{ map.docroot }}/{{ id }}
-  - name: '/usr/local/bin/sugarcli install:config:get --path="{{ map.docroot }}/{{ id }}/"'
-  - user: {{ map.www_user }}
-  - unless: test -d {{ map.docroot }}/{{ id }}/config_si.php
+{{ map.docroot }}/{{ id }}/config_si.php:
+  file.managed:
+    - source: salt://sugarcrm/files/config_si.php
+    - user: {{ map.www_user}}
+    - group: {{ map.www_group }}
+    - mode: 640
+    - template: jinja
+    - defaults:
+        dbuser: "{{ site.get('dbuser') }}"
+        dbpass: "{{ site.get('dbpass') }}"
+        database: "{{ site.get('database') }}"
+        dbhost: "{{ site.get('dbhost') }}"        
+        url: "{{ site.get('url') }}"
+        username: "{{ site.get('username') }}"
+        password: "{{ site.get('password') }}"
+        license: "{{ site.get('license', '') }}"
+        title: "{{ site.get('title', '') }}"
 
 # This command tells sugarcli to install sugarcrm
 install_{{ id }}:
  cmd.run:
   - cwd: {{ map.docroot }}/{{ id }}
-  - name: '/usr/local/bin/sugarcli core install --url="{{ site.get('url') }}" --title="{{ site.get('title') }}" --admin_user="{{ site.get('user') }}" --admin_password="{{ site.get('password') }}" --admin_email="{{ site.get('email') }}" --path="{{ map.docroot }}/{{ id }}/"'
+  - name: '/usr/local/bin/sugarcli install:run -p {{ map.docroot }}/{{ id }} -u {{ site.get('url') }} -s {{ map.tmp_dir }}/sugarcrm.zip -c {{ map.docroot }}/{{ id }}/config_si.php'
   - user: {{ map.www_user }}
   - unless: test -d {{ map.docroot }}/{{ id }}/config_si.php  
 
-# This command tells sugarcli to create our config_si.php, DB info needs to be the same as above
-configure_{{ id }}:
+# This command tells sugarcli to check our config_si.php
+check_{{ id }}:
  cmd.run:
-  - name: '/usr/local/bin/sugarcli core config --dbname="{{ site.get('database') }}" --dbuser="{{ site.get('dbuser') }}" --dbpass="{{ site.get('dbpass') }}" --path="{{ map.docroot }}/{{ id }}"'
+  - name: '/usr/local/bin/sugarcli install:check -p {{ map.docroot }}/{{ id }}'
   - cwd: {{ map.docroot }}/{{ id }}
   - user: {{ map.www_user }}
 

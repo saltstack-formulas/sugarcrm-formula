@@ -1,10 +1,10 @@
 <?php
 
 // Database configuration
-$sugar_config_si['setup_db_sugarsales_user'] = '<DB_USER>';
-$sugar_config_si['setup_db_sugarsales_password'] = '<DB_PASSWORD>';
-$sugar_config_si['setup_db_database_name'] = '<DB_NAME>';
-$sugar_config_si['setup_db_host_name'] = 'localhost';
+$sugar_config_si['setup_db_sugarsales_user'] = '{{ dbuser }}';
+$sugar_config_si['setup_db_sugarsales_password'] = '{{ dbpass }}';
+$sugar_config_si['setup_db_database_name'] = '{{ database }}';
+$sugar_config_si['setup_db_host_name'] = '{{ dbhost }}';
 
 // Elastic search configuration
 $sugar_config_si['setup_fts_type'] = 'Elastic';
@@ -12,16 +12,16 @@ $sugar_config_si['setup_fts_host'] = 'localhost';
 $sugar_config_si['setup_fts_port'] = '9200';
 
 // Sugar Config
-$sugar_config_si['setup_site_url'] = '<SITE_URL>';
-$sugar_config_si['setup_site_admin_user_name'] = '<SUGAR_ADMIN_USER>';
-$sugar_config_si['setup_site_admin_password'] = '<SUGAR_ADMIN_PASSWORD>';
-$sugar_config_si['setup_license_key'] = '<SUGAR_LICENSE>';
+$sugar_config_si['setup_site_url'] = '{{ url }}';
+$sugar_config_si['setup_site_admin_user_name'] = '{{ username }}';
+$sugar_config_si['setup_site_admin_password'] = '{{ password }}';
+$sugar_config_si['setup_license_key'] = '{{ license }}';
 
 // Install demo data <yes|no>
 $sugar_config_si['demoData'] = 'no';
 
 // Default system configuration
-$sugar_config_si['setup_system_name'] = 'SugarCRM - Commercial CRM';
+$sugar_config_si['setup_system_name'] = '{{ title }}';
 // English (US)
 $sugar_config_si['default_language'] = 'en_us';
 $sugar_config_si['default_locale_name_format'] = 's f l';
