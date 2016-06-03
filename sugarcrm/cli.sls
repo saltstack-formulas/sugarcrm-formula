@@ -7,4 +7,4 @@
     - source_hash: {{ salt['pillar.get']('sugarcrm:cli:hash') }}
     - user: {{ map.www_user }}
     - group: {{ map.www_group }}
-    - mode: 766
+    - mode: 740
