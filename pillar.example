@@ -1,12 +1,15 @@
 sugarcrm:
+    source: http://tenet.dl.sourceforge.net/project/sugarcrm/1%20-%20SugarCRM%206.5.X/SugarCommunityEdition-6.5.X/SugarCE-6.5.23.zip
+    hash: 'c6ad2b140506be7ff6b54f5e91698e20ad5e25b5'
     cli:
         source: http://apt.inetprocess.fr/pub/sugarcli.phar
-        hash:  https://github.com/wp-cli/builds/blob/gh-pages/phar/wp-cli-nightly.phar.md5
+        hash:  'd60245d858af301c71a23bd266fd3849248c864f'
     sites:
         sitenameA.com:
             username: siteAuser
             password: siteApass
             database: siteAdb
+            dbhost: localhost
             dbuser: siteAdbuser
             dbpass: siteAdbpass
             url: http://siteA.com
@@ -16,6 +19,7 @@ sugarcrm:
             username: siteBuser
             password: siteBpass
             database: siteBdb
+            dbhost: localhost
             dbuser: siteBdbuser
             dbpass: siteBdbpass
             url: http://siteB.com
