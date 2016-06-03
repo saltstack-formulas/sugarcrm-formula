@@ -1,90 +1,73 @@
 <?php
-/** 
- * This file is managed by Salt.
- *
- * Local changes will be overwritten!
- */
 
-/**
- * The base configurations of the WordPress.
- *
- * This file has the following configurations: MySQL settings, Table Prefix,
- * Secret Keys, WordPress Language, and ABSPATH. You can find more information
- * by visiting {@link http://codex.wordpress.org/Editing_wp-config.php Editing
- * wp-config.php} Codex page. You can get the MySQL settings from your web host.
- *
- * This file is used by the wp-config.php creation script during the
- * installation. You don't have to use the web site, you can just copy this file
- * to "wp-config.php" and fill in the values.
- *
- * @package WordPress
- */
+// Database configuration
+$sugar_config_si['setup_db_sugarsales_user'] = '<DB_USER>';
+$sugar_config_si['setup_db_sugarsales_password'] = '<DB_PASSWORD>';
+$sugar_config_si['setup_db_database_name'] = '<DB_NAME>';
+$sugar_config_si['setup_db_host_name'] = 'localhost';
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', '{{ database }}');
+// Elastic search configuration
+$sugar_config_si['setup_fts_type'] = 'Elastic';
+$sugar_config_si['setup_fts_host'] = 'localhost';
+$sugar_config_si['setup_fts_port'] = '9200';
 
-/** MySQL database username */
-define('DB_USER', '{{ username }}');
+// Sugar Config
+$sugar_config_si['setup_site_url'] = '<SITE_URL>';
+$sugar_config_si['setup_site_admin_user_name'] = '<SUGAR_ADMIN_USER>';
+$sugar_config_si['setup_site_admin_password'] = '<SUGAR_ADMIN_PASSWORD>';
+$sugar_config_si['setup_license_key'] = '<SUGAR_LICENSE>';
 
-/** MySQL database password */
-define('DB_PASSWORD', '{{ password }}');
+// Install demo data <yes|no>
+$sugar_config_si['demoData'] = 'no';
 
-/** MySQL hostname */
-define('DB_HOST', 'localhost');
+// Default system configuration
+$sugar_config_si['setup_system_name'] = 'SugarCRM - Commercial CRM';
+// English (US)
+$sugar_config_si['default_language'] = 'en_us';
+$sugar_config_si['default_locale_name_format'] = 's f l';
 
-/** Database Charset to use in creating database tables. */
-define('DB_CHARSET', 'utf8');
+$sugar_config_si['default_currency_iso4217'] = 'USD';
+$sugar_config_si['default_currency_name'] = 'US Dollar';
+$sugar_config_si['default_currency_symbol'] = '$';
+$sugar_config_si['default_currency_significant_digits'] = '2';
 
-/** The Database Collate type. Don't change this if in doubt. */
-define('DB_COLLATE', '');
+$sugar_config_si['default_decimal_seperator'] = '.';
+$sugar_config_si['default_number_grouping_seperator'] = ',';
 
-/**#@+
- * Authentication Unique Keys and Salts.
- *
- * Change these to different unique phrases!
- * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
- * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
- *
- * @since 2.6.0
- */
+$sugar_config_si['default_date_format'] = 'm/d/Y';
+$sugar_config_si['default_time_format'] = 'h:ia';
 
-require_once(dirname( __FILE__ ) . '/wp-keys.php');
+$sugar_config_si['default_export_charset'] = 'UTF-8';
+$sugar_config_si['export_delimiter'] = ',';
 
-/**#@-*/
+/* French configuration */
+// $sugar_config_si['default_language'] = 'fr_FR';
+// $sugar_config_si['default_locale_name_format'] = 's f l';
+//
+// $sugar_config_si['default_currency_iso4217'] = 'EUR';
+// $sugar_config_si['default_currency_name'] = 'Euro';
+// $sugar_config_si['default_currency_symbol'] = '€';
+// $sugar_config_si['default_currency_significant_digits'] = '2';
+//
+// $sugar_config_si['default_decimal_seperator'] = ',';
+// $sugar_config_si['default_number_grouping_seperator'] = ',';
+//
+// $sugar_config_si['default_date_format'] = 'd/m/Y';
+// $sugar_config_si['default_time_format'] = 'H:i';
+//
+// $sugar_config_si['default_export_charset'] = 'UTF-8';
+// $sugar_config_si['export_delimiter'] = ',';
 
-/**
- * WordPress Database Table prefix.
- *
- * You can have multiple installations in one database if you give each a unique
- * prefix. Only numbers, letters, and underscores please!
- */
-$table_prefix  = 'wp_';
 
-/**
- * WordPress Localized Language, defaults to English.
- *
- * Change this to localize WordPress. A corresponding MO file for the chosen
- * language must be installed to wp-content/languages. For example, install
- * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
- * language support.
- */
-define('WPLANG', '');
+// Advanced configuration
+$sugar_config_si['setup_db_type'] = 'mysql';
+$sugar_config_si['setup_db_pop_demo_data'] = false;
 
-/**
- * For developers: WordPress debugging mode.
- *
- * Change this to true to enable the display of notices during development.
- * It is strongly recommended that plugin and theme developers use WP_DEBUG
- * in their development environments.
- */
-define('WP_DEBUG', false);
+$sugar_config_si['setup_db_create_database'] = 1;
+$sugar_config_si['setup_db_create_sugarsales_user'] = false;
+$sugar_config_si['setup_db_drop_tables'] = 0;
+$sugar_config_si['setup_db_username_is_privileged'] = true;
+$sugar_config_si['setup_db_admin_user_name'] = $sugar_config_si['setup_db_sugarsales_user'];
+$sugar_config_si['setup_db_admin_password'] = $sugar_config_si['setup_db_sugarsales_password'];
 
-/* That's all, stop editing! Happy blogging. */
-
-/** Absolute path to the WordPress directory. */
-if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__FILE__) . '/');
-
-/** Sets up WordPress vars and included files. */
-require_once(ABSPATH . 'wp-settings.php');
+$sugar_config_si['setup_site_sugarbeet_automatic_checks'] = true;
