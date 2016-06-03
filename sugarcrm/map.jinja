@@ -3,15 +3,18 @@
         'docroot': '/www/html',
         'www_group': 'www-data',
         'www_user': 'www-data',
+        'tmp_dir': '/tmp',
     },
     'Debian': {
         'docroot': '/www/html',
         'www_group': 'www-data',
         'www_user': 'www-data',
+        'tmp_dir': '/tmp',
     },
     'Redhat': {
         'docroot': '/var/www/html',
         'www_group': 'apache',
         'www_user': 'apache',
+        'tmp_dir': '/tmp',
     },
 }, merge=salt['pillar.get']('sugarcrm:lookup')) %}
