@@ -2,7 +2,7 @@
 sugarcrm-formula
 =================
 
-A saltstack formula to install and configure SugarCRM on Debian, Ubuntu, and RHEL.
+A saltstack formula to install and configure SugarCRM, a customer relationship management (CRM) system.
 
 .. note::
 
