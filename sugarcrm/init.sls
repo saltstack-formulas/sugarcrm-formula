@@ -30,24 +30,6 @@ include:
     - mode: 640
 {% endif %}   
 
-{{ map.docroot }}/{{ id }}/config_si.php:
-  file.managed:
-    - source: salt://sugarcrm/files/config_si.php
-    - user: {{ map.www_user}}
-    - group: {{ map.www_group }}
-    - mode: 640
-    - template: jinja
-    - defaults:
-        dbuser: "{{ site.get('dbuser') }}"
-        dbpass: "{{ site.get('dbpass') }}"
-        database: "{{ site.get('database') }}"
-        dbhost: "{{ site.get('dbhost') }}"        
-        url: "{{ site.get('url') }}"
-        username: "{{ site.get('username') }}"
-        password: "{{ site.get('password') }}"
-        license: "{{ site.get('license', '') }}"
-        title: "{{ site.get('title', '') }}"
-
 # This command tells sugarcli to install sugarcrm
 install_{{ id }}:
  cmd.run:
@@ -67,4 +49,21 @@ check_{{ id }}:
   - cwd: {{ map.docroot }}/{{ id }}
   - user: {{ map.www_user }}
 
+{{ map.docroot }}/{{ id }}/config_si.php:
+  file.managed:
+    - source: salt://sugarcrm/files/config_si.php
+    - user: {{ map.www_user}}
+    - group: {{ map.www_group }}
+    - mode: 640
+    - template: jinja
+    - defaults:
+        dbuser: "{{ site.get('dbuser') }}"
+        dbpass: "{{ site.get('dbpass') }}"
+        database: "{{ site.get('database') }}"
+        dbhost: "{{ site.get('dbhost') }}"        
+        url: "{{ site.get('url') }}"
+        username: "{{ site.get('username') }}"
+        password: "{{ site.get('password') }}"
+        license: "{{ site.get('license', '') }}"
+        title: "{{ site.get('title', '') }}"
 {% endfor %}
