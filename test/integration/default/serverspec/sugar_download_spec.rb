@@ -9,7 +9,7 @@ describe 'sugarcrm archive download' do
 
     describe file(sugarcrm_zip) do
         it { should exist }
-        it { should be_mode 740 }
+        it { should be_mode 640 }
         it { should be_owned_by 'www-data' }
         it { should be_grouped_into 'www-data' }
     end
@@ -21,7 +21,7 @@ describe 'sugarcrm custom archive download' do
 
     describe file(sugarcrm_zip) do
         it { should exist }
-        it { should be_mode 740 }
+        it { should be_mode 640 }
         it { should be_owned_by 'www-data' }
         it { should be_grouped_into 'www-data' }
     end
