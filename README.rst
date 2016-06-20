@@ -59,8 +59,3 @@ or
 * `nginx-formula <https://github.com/saltstack-formulas/nginx-formula>`_
 * `php-formula <https://github.com/saltstack-formulas/php-formula>`_
 
-Author
-======
-
-Nitin Madhok nmadhok@g.clemson.edu
-Debian Fork by Starchy Grant starchy@gmail.com
