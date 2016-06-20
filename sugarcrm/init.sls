@@ -3,10 +3,14 @@
 include:
   - sugarcrm.cli
 
-download_sugarcrm:
- cmd.run:
-  - name: 'wget -O  {{ map.tmp_dir }}/sugarcrm.zip {{ salt['pillar.get']('sugarcrm:source') }}'
-  - user: {{ map.www_user }}
+{{ map.tmp_dir }}/sugarcrm.zip:
+  file.managed:
+    - source: {{ salt['pillar.get']('sugarcrm:source') }}
+    - source_hash: {{ salt['pillar.get']('sugarcrm:hash') }}
+    - user: {{ map.www_user }}
+    - group: {{ map.www_group }}
+    - mode: 640
+
 
 {% for id, site in salt['pillar.get']('sugarcrm:sites', {}).items() %}
 {{ map.docroot }}/{{ id }}:
@@ -20,7 +24,7 @@ download_sugarcrm:
 /tmp/sugarcrm_{{ id }}.zip:
   file.managed:
     - source: {{ site.get('source') }}
-    - source_hash: {{ site.get('source_hash') }}
+    - source_hash: {{ site.get('hash') }}
     - user: {{ map.www_user }}
     - group: {{ map.www_group }}
     - mode: 640
