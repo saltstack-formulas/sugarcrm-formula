@@ -3,6 +3,18 @@
 include:
   - sugarcrm.cli
 
+/etc/sugarcrm:
+  file.directory:
+    - user: {{ map.www_user }}
+    - group: {{ map.www_group }}
+    - dir_mode: 750
+    - file_mode: 640
+    - recurse:
+      - user
+      - group
+      - mode
+    - makedirs: True
+
 {{ map.tmp_dir }}/sugarcrm.zip:
   file.managed:
     - source: {{ salt['pillar.get']('sugarcrm:source') }}
@@ -30,27 +42,9 @@ include:
     - mode: 640
 {% endif %}   
 
-# This command tells sugarcli to install sugarcrm
-install_{{ id }}:
- cmd.run:
-  - cwd: {{ map.docroot }}/{{ id }}
-{% if site.get('source') %}  
-  - name: '/usr/local/bin/sugarcli install:run -p {{ map.docroot }}/{{ id }} -u {{ site.get('url') }} -s {{ map.tmp_dir }}/sugarcrm_{{ id }}.zip -c {{ map.docroot }}/{{ id }}/config_si.php'
-{% else %}  
-  - name: '/usr/local/bin/sugarcli install:run -p {{ map.docroot }}/{{ id }} -u {{ site.get('url') }} -s {{ map.tmp_dir }}/sugarcrm.zip -c {{ map.docroot }}/{{ id }}/config_si.php'
-{% endif %}   
-  - user: {{ map.www_user }}
-  - unless: test -d {{ map.docroot }}/{{ id }}/config_si.php  
-
-# This command tells sugarcli to check our config_si.php
-check_{{ id }}:
- cmd.run:
-  - name: '/usr/local/bin/sugarcli install:check -p {{ map.docroot }}/{{ id }}'
-  - cwd: {{ map.docroot }}/{{ id }}
-  - user: {{ map.www_user }}
-
-{{ map.docroot }}/{{ id }}/config_si.php:
+{{ id }}_config:
   file.managed:
+    - name: /etc/sugarcrm/{{ id }}_config_si.php
     - source: salt://sugarcrm/files/config_si.php
     - user: {{ map.www_user}}
     - group: {{ map.www_group }}
@@ -66,4 +60,20 @@ check_{{ id }}:
         password: "{{ site.get('password') }}"
         license: "{{ site.get('license', '') }}"
         title: "{{ site.get('title', '') }}"
+
+# This command tells sugarcli to install sugarcrm
+install_{{ id }}:
+ cmd.run:
+  - cwd: {{ map.docroot }}/{{ id }}
+{% if site.get('source') %}  
+  - name: '/usr/local/bin/sugarcli install:run -p {{ map.docroot }}/{{ id }} -u {{ site.get('url') }} -s {{ map.tmp_dir }}/sugarcrm_{{ id }}.zip -c /etc/sugarcrm/{{ id }}_config_si.php'
+{% else %}  
+  - name: '/usr/local/bin/sugarcli install:run -p {{ map.docroot }}/{{ id }} -u {{ site.get('url') }} -s {{ map.tmp_dir }}/sugarcrm.zip -c /etc/sugarcrm/{{ id }}_config_si.php'
+{% endif %}   
+  - user: {{ map.www_user }}
+  - unless: /usr/local/bin/sugarcli install:check -p {{ map.docroot }}/{{ id }} 
+
+{{ map.docroot }}/{{ id }}/config_si.php:
+  file.symlink:
+    - target: /etc/sugarcrm/{{id}}_config_si.php
 {% endfor %}
