@@ -126,32 +126,32 @@ provisioner:
             databases:
               - database: siteBdb
                 grants: ['all privileges']            
-      sugarcrm.sls:
-        sugarcrm:
-            cli:
-                source: https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-                hash:  https://github.com/wp-cli/builds/blob/gh-pages/phar/wp-cli-nightly.phar.md5
-            sites:
-                sitenameA.com:
-                    username: siteAuser
-                    password: siteApass
-                    database: siteAdb
-                    dbhost: localhost
-                    dbuser: siteAdbuser
-                    dbpass: siteAdbpass
-                    url: http://siteA.com
-                    title: 'siteA title'
-                    email: siteA@email.com
-                sitenameB.com:
-                    username: siteBuser
-                    password: siteBpass
-                    database: siteBdb
-                    dbhost: localhost
-                    dbuser: siteBdbuser
-                    dbpass: siteBdbpass
-                    url: http://siteB.com
-                    title: 'siteB title'
-                    email: siteB@email.com      
+    sugarcrm.sls:
+      sugarcrm:
+          cli:
+              source: http://apt.inetprocess.fr/pub/sugarcli.phar
+              hash:  d60245d858af301c71a23bd266fd3849248c864f
+          sites:
+              sitenameA.com:
+                  username: siteAuser
+                  password: siteApass
+                  database: siteAdb
+                  dbhost: localhost
+                  dbuser: siteAdbuser
+                  dbpass: siteAdbpass
+                  url: http://siteA.com
+                  title: 'siteA title'
+                  email: siteA@email.com
+              sitenameB.com:
+                  username: siteBuser
+                  password: siteBpass
+                  database: siteBdb
+                  dbhost: localhost
+                  dbuser: siteBdbuser
+                  dbpass: siteBdbpass
+                  url: http://siteB.com
+                  title: 'siteB title'
+                  email: siteB@email.com      
 
 suites:
   - name: default
