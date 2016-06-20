@@ -21,9 +21,9 @@ provisioner:
   is_file_root: false
   formula: sugarcrm
   dependencies: 
-    - {name: php, path: ../php-formula}
-    - {name: apache, path: ../apache-formula}
-    - {name: mysql, path: ../mysql-formula}
+    - {name: php, path: ../lamp/php-formula}
+    - {name: apache, path: ../lamp/apache-formula}
+    - {name: mysql, path: ../lamp/mysql-formula}
   pillars:
     top.sls:
       base:
@@ -154,6 +154,8 @@ provisioner:
                   url: http://siteB.com
                   title: 'siteB title'
                   email: siteB@email.com
+                  source: http://tenet.dl.sourceforge.net/project/sugarcrm/1%20-%20SugarCRM%206.5.X/SugarCommunityEdition-6.5.X/SugarCE-6.5.23.zip
+                  hash: 'sha512=5bb4be27a1cabe8e0b3e20698a12ac52e15159077a73295e6170a30e8ff5f31c7a395797c2812936ad721b9472d19570c20c092c1a43f3954cd2c2149fb7ec44'                  
 suites:
   - name: default
     provisioner:
