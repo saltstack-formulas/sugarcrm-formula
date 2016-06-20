@@ -16,6 +16,16 @@ download_sugarcrm:
     - mode: 755
     - makedirs: True
 
+{% if site.get('source') %}
+/tmp/sugarcrm_{{ id }}.zip:
+  file.managed:
+    - source: {{ site.get('source') }}
+    - source_hash: {{ site.get('source_hash') }}
+    - user: {{ map.www_user }}
+    - group: {{ map.www_group }}
+    - mode: 640
+{% endif %}   
+
 {{ map.docroot }}/{{ id }}/config_si.php:
   file.managed:
     - source: salt://sugarcrm/files/config_si.php
@@ -38,7 +48,11 @@ download_sugarcrm:
 install_{{ id }}:
  cmd.run:
   - cwd: {{ map.docroot }}/{{ id }}
+{% if site.get('source') %}  
+  - name: '/usr/local/bin/sugarcli install:run -p {{ map.docroot }}/{{ id }} -u {{ site.get('url') }} -s {{ map.tmp_dir }}/sugarcrm_{{ id }}.zip -c {{ map.docroot }}/{{ id }}/config_si.php'
+{% else %}  
   - name: '/usr/local/bin/sugarcli install:run -p {{ map.docroot }}/{{ id }} -u {{ site.get('url') }} -s {{ map.tmp_dir }}/sugarcrm.zip -c {{ map.docroot }}/{{ id }}/config_si.php'
+{% endif %}   
   - user: {{ map.www_user }}
   - unless: test -d {{ map.docroot }}/{{ id }}/config_si.php  
 
